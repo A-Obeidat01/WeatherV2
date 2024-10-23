@@ -12,20 +12,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.weather.R
+import com.weather.data.WeatherStatus
+import com.weather.utility.getWeatherImage
 
 @Composable
-fun ShowWeatherIcon(weatherIcon: Boolean) {
+fun ShowWeatherIcon(weatherStatus: WeatherStatus) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
-        contentAlignment = Alignment.BottomCenter // محاذاة الصورة إلى أسفل الشاشة
+        contentAlignment = Alignment.BottomCenter
     ) {
         Image(
-            painter = if (weatherIcon) {
-                painterResource(R.drawable.a2) // يعرض a2.png إذا كانت weatherIcon == true
-            } else {
-                painterResource(R.drawable.a1) // يعرض a1.png إذا كانت weatherIcon == false
-            },
+            painter =  painterResource(weatherStatus.getWeatherImage()),
             contentDescription = "Weather Icon",
             modifier = Modifier
                 .fillMaxWidth()
@@ -38,6 +36,6 @@ fun ShowWeatherIcon(weatherIcon: Boolean) {
 @Composable
 fun PreviewShowWeatherIcon() {
     // عرض صورة بناءً على قيمة weatherIcon
-    ShowWeatherIcon(weatherIcon = true) // جرب true لعرض a2.png
+    ShowWeatherIcon(weatherStatus = WeatherStatus.Rainy) // جرب true لعرض a2.png
     // ShowWeatherIcon(weatherIcon = false) // جرب false لعرض a1.png
 }

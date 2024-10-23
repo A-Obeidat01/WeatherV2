@@ -23,11 +23,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.weather.data.WetherModel
+import com.weather.data.WeatherModel
+import com.weather.data.WeatherStatus
+import com.weather.utility.getWeatherColor
+import com.weather.utility.getWeatherIcon
+import com.weather.utility.getWeatherTitle
 
 @Composable
 fun TodayDateView(
-    wetherModel: WetherModel
+    wetherModel: WeatherModel
 ) {
     // Main layout for the weather info
     Column(
@@ -65,9 +69,9 @@ fun TodayDateView(
                 modifier = Modifier.size(40.dp)
             )*/
             Icon(
-                imageVector = if (wetherModel.weatherIcon) Icons.Default.WbSunny else Icons.Default.Cloud, // عرض أيقونة الشمس أو الغيمة بناءً على الطقس
-                contentDescription = if (wetherModel.weatherIcon) "Sunny Icon" else "Cloudy Icon", // وصف الأيقونة
-                tint = if (wetherModel.weatherIcon) Color(0xFFFFA500) else Color.Gray, // تغيير اللون بناءً على الطقس
+                imageVector =wetherModel.status.getWeatherIcon(), // عرض أيقونة الشمس أو الغيمة بناءً على الطقس
+                contentDescription = wetherModel.status.getWeatherTitle(), // وصف الأيقونة
+                tint = wetherModel.status.getWeatherColor(),
                 modifier = Modifier.size(40.dp)
             )
         }
@@ -111,11 +115,11 @@ fun TodayDateView(
 @Preview(showBackground = true)
 @Composable
 fun PreviewWeatherScreen() {
-    val weatherData = WetherModel(
+    val weatherData = WeatherModel(
         city = "Irbid Governorate, JO",
         temperature = 21.5,
         date = "الاثنين، 21 تشرين الأول 2024",
-        weatherIcon = true
+        status = WeatherStatus.Rainy
     )
     TodayDateView(wetherModel = weatherData) // استدعاء مع بيانات الطقس
 }

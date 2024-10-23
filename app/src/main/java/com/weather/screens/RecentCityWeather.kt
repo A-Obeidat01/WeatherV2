@@ -22,10 +22,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.weather.data.WetherModel
+import com.weather.data.WeatherModel
+import com.weather.data.WeatherStatus
+import com.weather.utility.getWeatherColor
+import com.weather.utility.getWeatherIcon
+import com.weather.utility.getWeatherTitle
 
 @Composable
-fun CityWeatherItem(wetherModel: WetherModel) {
+fun RecentCityWeather(wetherModel: WeatherModel) {
     Row(
         modifier = Modifier
             .padding(8.dp)
@@ -76,9 +80,9 @@ fun CityWeatherItem(wetherModel: WetherModel) {
             modifier = Modifier.size(40.dp)
         )*/
         Icon(
-            imageVector = if (wetherModel.weatherIcon) Icons.Default.WbSunny else Icons.Default.Cloud, // عرض أيقونة الشمس أو الغيمة بناءً على الطقس
-            contentDescription = if (wetherModel.weatherIcon) "Sunny Icon" else "Cloudy Icon", // وصف الأيقونة
-            tint = if (wetherModel.weatherIcon) Color(0xFFFFA500) else Color.Gray, // تغيير اللون بناءً على الطقس
+            imageVector =wetherModel.status.getWeatherIcon(), // عرض أيقونة الشمس أو الغيمة بناءً على الطقس
+            contentDescription = wetherModel.status.getWeatherTitle(), // وصف الأيقونة
+            tint = wetherModel.status.getWeatherColor(), // تغيير اللون بناءً على الطقس
             modifier = Modifier.size(40.dp)
         )
     }
@@ -86,22 +90,22 @@ fun CityWeatherItem(wetherModel: WetherModel) {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewCityWeatherItem() {
+private fun PreviewCityWeatherItem() {
     val weatherDataList = listOf(
-        WetherModel(
+        WeatherModel(
             city = "Dubai, AE",
             temperature = 31.77,
             date = "الأحد, 20 تشرين",
-            weatherIcon = true
+            status = WeatherStatus.Rainy
         ),
-        WetherModel(
+        WeatherModel(
             city = "Irbid, JO",
             temperature = 25.77,
             date = "الأحد, 20 تشرين",
-            weatherIcon = false
+            status = WeatherStatus.Sunny
         ),
 
 
         )
-    CityWeatherItem(wetherModel = weatherDataList[1])
+    RecentCityWeather(wetherModel = weatherDataList[1])
 }

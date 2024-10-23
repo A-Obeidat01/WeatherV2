@@ -1,8 +1,7 @@
 package com.weather
 
-import SearchBar
+
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,15 +18,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.weather.ui.theme.WeatherV2Theme
-import com.weather.data.WetherModel
-import com.weather.screens.CityWeatherItem
-import com.weather.weatherItem.weatherApi.WeatherApiService
-import com.weather.weatherItem.weatherApi.WeatherResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.weather.data.WeatherModel
+import com.weather.screens.RecentCityWeather
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -134,29 +126,29 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun WeatherScreen() {
-        var weatherData by remember { mutableStateOf<WetherModel?>(null) }
+        var weatherData by remember { mutableStateOf<WeatherModel?>(null) }
         var searchQuery by remember { mutableStateOf("") }
 
         Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-            SearchBar(searchQuery) { newText ->
+/*            WeatherSearchBar(searchQuery) { newText ->
                 searchQuery = newText
                 if (newText.isNotEmpty()) {
                     fetchWeather(newText) { fetchedWeather ->
                         weatherData = fetchedWeather
                     }
                 }
-            }
+            */
 
             Spacer(modifier = Modifier.padding(8.dp))
 
             weatherData?.let {
-                CityWeatherItem(wetherModel = it)
+                RecentCityWeather(wetherModel = it)
             } ?: run {
                 Text(text = "Please enter a city to get weather information.")
             }
         }
     }
-
+/*
     private fun fetchWeather(cityName: String, onWeatherFetched: (WetherModel?) -> Unit) {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org/")
@@ -190,4 +182,6 @@ class MainActivity : ComponentActivity() {
             }
         })
     }
+    */
+
 }
