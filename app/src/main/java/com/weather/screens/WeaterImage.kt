@@ -1,4 +1,4 @@
-package com.weather.weatherItem.screen
+package com.weather.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

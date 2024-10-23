@@ -1,4 +1,4 @@
-package com.weather.weatherItem.screen
+package com.weather.screens
 
 
 
@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.weather.weatherItem.data.WetherModel
+import com.weather.data.WetherModel
 import com.weather.weatherItem.weatherApi.WeatherApiService
 import com.weather.weatherItem.weatherApi.WeatherResponse
 import kotlinx.coroutines.launch

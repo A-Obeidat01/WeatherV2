@@ -18,15 +18,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelProvider
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import com.weather.ui.theme.WeatherV2Theme
-import com.weather.weatherItem.data.WetherModel
-import com.weather.weatherItem.screen.CityWeatherItem
-import com.weather.weatherItem.screen.ShowWeatherIcon
-import com.weather.weatherItem.screen.WeatherViewModel
+import com.weather.data.WetherModel
+import com.weather.screens.CityWeatherItem
 import com.weather.weatherItem.weatherApi.WeatherApiService
 import com.weather.weatherItem.weatherApi.WeatherResponse
 import retrofit2.Call
