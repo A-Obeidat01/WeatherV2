@@ -20,7 +20,9 @@ import androidx.compose.material3.TextFieldDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WeatherSearchBar() {
+fun WeatherSearchBar(
+    onSearchQueryChanged: (String) -> Unit = {}
+) {
     var searchQuery by remember { mutableStateOf(TextFieldValue("")) }
 
     Box(
@@ -45,7 +47,10 @@ fun WeatherSearchBar() {
             Spacer(modifier = Modifier.width(8.dp))
             TextField(
                 value = searchQuery,
-                onValueChange = { searchQuery = it },
+                onValueChange = {
+                    searchQuery = it
+                    onSearchQueryChanged(it.text)
+                },
                 placeholder = { Text("Search City Weather") },
                 modifier = Modifier.fillMaxWidth(),
                 colors = TextFieldDefaults.textFieldColors(
